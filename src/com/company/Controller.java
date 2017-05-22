@@ -1,27 +1,12 @@
 package com.company;
 
 import java.lang.reflect.Field;
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.*;
-import java.util.regex.Pattern;
 
 public class Controller {
 
-    static final List<String> delimiters = new ArrayList<>(Arrays.asList(",", " ", "|"));
-    static final List<String> pets = new ArrayList<>(Arrays.asList("Dog", "Cat", "None", "Both"));
-
     public static void main(String[] args)
     {
-
-        //1) Date of birth format any specific format
-        //2) using reflection preferred.
-        //3) how to print values in tabular or just line by line
-        //4) Pets are mostly Cat,dog,Both,None is it possible to have B and N in comma separated values.Uniqueness of characters
-        //5) Middle Name is empty for now
-
         start("/Users/ramakrishnacmanyam/Downloads/code-test/input_files/pipe.txt");
     }
 
