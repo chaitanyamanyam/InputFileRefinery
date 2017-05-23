@@ -1,14 +1,13 @@
 package test;
 
+import com.company.DataSorter;
 import com.company.Person;
 import com.company.SortingImpl;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -32,6 +31,8 @@ public class SortingImplTest {
     public void testLastNameAsc()
     {
         List<Person> sortedListByLastName = sorting.sortByLastNameAsc(testPersonList);
+        Collections.sort(testPersonList, DataSorter.SortByLastName);
+        assertEquals(testPersonList, sortedListByLastName);
         assertEquals(sortedListByLastName.get(0), stewart);
         assertEquals(sortedListByLastName.get(1), john);
     }
@@ -40,6 +41,8 @@ public class SortingImplTest {
     public void testYoungest()
     {
         List<Person> sortedListByDOB= sorting.sortByYoungest(testPersonList);
+        Collections.sort(testPersonList, DataSorter.SortByDOB.reversed());
+        assertEquals(testPersonList, sortedListByDOB);
         assertEquals(sortedListByDOB.get(0), john);
         assertEquals(sortedListByDOB.get(1), stewart);
     }
@@ -50,8 +53,8 @@ public class SortingImplTest {
         Person paul = new Person("Wood", "Paul", "K", "Spider", "Blue", LocalDate.now());
         testPersonList.add(paul);
         List<Person> sortedListByColorAndLastName = sorting.sortByFavColorAndLastName(testPersonList);
-
-        assertEquals(sortedListByColorAndLastName.get(0), paul);
+        Collections.sort(testPersonList, DataSorter.FavColor.thenComparing(DataSorter.SortByLastName.reversed()));
+        assertEquals(testPersonList, sortedListByColorAndLastName);
         assertEquals(sortedListByColorAndLastName.get(1), john);
         assertEquals(sortedListByColorAndLastName.get(2), stewart);
     }
