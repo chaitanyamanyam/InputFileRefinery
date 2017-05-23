@@ -7,38 +7,50 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
  * Created by ramakrishnacmanyam on 5/21/17.
  */
-public class SpaceFileDataParser implements DataParser {
+public class SpaceFileDataParser implements DataParser
+{
 
     private final List<String> pets = new ArrayList<>(Arrays.asList("Dog", "Cat", "None", "Both"));
+    Logger log = Logger.getLogger(SpaceFileDataParser.class.getName());
 
     @Override
-    public List<Person> parse(List<String> plainData) {
+    public List<Person> parse(List<String> plainData)
+    {
 
         List<Person> listOfPeople = new ArrayList<>();
         String delimiter = Pattern.quote(Delimiter.valueOf(Delimiter.SPACE));
+        String dobFormat = "M-d-yyyy";
 
         for (String line: plainData)
         {
             ArrayList<String> stringPieces = new ArrayList<>(Arrays.asList(line.split(delimiter)));
 
-            if (stringPieces.size() != Person.class.getDeclaredFields().length) continue;
+            if (stringPieces.size() != Person.class.getDeclaredFields().length)
+            {
+                log.warning("Record " + line + " doesn't match with the format");
+                continue;
+            }
 
             Collections.swap(stringPieces, stringPieces.size() - 2, stringPieces.size() - 1);
             stringPieces.set(3, getPetFromInitial(stringPieces.get(3)));
 
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("M-d-yyyy");
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(dobFormat);
 
             LocalDate dateOfBirth;
-            try {
+            try
+            {
                 dateOfBirth = LocalDate.parse(stringPieces.get(5), format);
             }
             catch (DateTimeParseException e)
             {
+                log.warning("date of birth: " + stringPieces.get(5) + " is not listed in the specific format " +
+                        dobFormat);
                 continue;
             }
 
@@ -56,8 +68,7 @@ public class SpaceFileDataParser implements DataParser {
         {
             if (pet.startsWith(initial)) return pet;
         }
-
+        log.warning("Pet with initial " + initial + " doesn't match with any pet");
         return "";
     }
-
 }

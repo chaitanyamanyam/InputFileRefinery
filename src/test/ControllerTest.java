@@ -8,8 +8,6 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.Assert.assertEquals;
-
 public class ControllerTest
 {
     Controller controller;
@@ -24,7 +22,7 @@ public class ControllerTest
     {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        controller.start("/Users/ramakrishnacmanyam/Downloads/code-test/input_files/pipe.txt");
-        
+        Controller.start("/Users/ramakrishnacmanyam/Downloads/code-test/input_files/pipe.txt");
+
     }
 }
