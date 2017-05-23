@@ -11,7 +11,7 @@ public class Controller
 
     public static void main(String[] args)
     {
-        start("/Users/ramakrishnacmanyam/Downloads/code-test/input_files");
+        start("/Users/ramakrishnacmanyam/Wistia/resources/");
     }
 
     public static void start(String directoryPath)
@@ -50,9 +50,9 @@ public class Controller
     public static List<Person> parseEachFile(String filePath)
     {
         Resolver resolver;
+        List<Person> listOfPeople = new ArrayList<>();
         FileReader fileReader = new FileReader();
         List<String> plainData = fileReader.read(filePath);
-        List<Person> listOfPeople = new ArrayList<>();
         if (!plainData.isEmpty())
         {
             String firstLine = plainData.get(0);

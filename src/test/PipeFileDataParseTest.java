@@ -46,9 +46,11 @@ public class PipeFileDataParseTest
     {
         String pipeString = "Runyon|Yoshie|H|Cat|Red|10-15-197";
         List<Person> personList = parser.parse(new ArrayList<>(Arrays.asList(pipeString)));
+        assertEquals(personList.size(), 0);
 
+        pipeString = "Runyon|Yoshie|H|Cat|Red";
+        personList = parser.parse(new ArrayList<>(Arrays.asList(pipeString)));
         assertEquals(personList.size(), 0);
     }
-
 
 }

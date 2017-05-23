@@ -10,6 +10,10 @@ import java.util.List;
  */
 public class SortingImpl
 {
+    public final static String sortByLastName = "------------------------------Sort by Last Name [A-Z]----------------";
+    public final static String sortByYoungest = "------------------------------Sort by Youngest-----------------------";
+    public final static String sortByColorAndLastName = "-----------------------Sort by Color[A-Z] and LastName[Z-A]------------";
+
     public void sortPersonList(List<Person> personList)
     {
         printHeader();
@@ -29,7 +33,7 @@ public class SortingImpl
 
     public List<Person> sortByLastNameAsc(List<Person> listOfPeople)
     {
-        System.out.println("-----------------Sort by Last Name [A-Z]-----------");
+        System.out.println(sortByLastName);
         Comparator<Person> lastNameComparator = DataSorter.SortByLastName;
         Collections.sort(listOfPeople, lastNameComparator);
         listOfPeople.forEach(System.out::println);
@@ -38,7 +42,7 @@ public class SortingImpl
 
     public List<Person> sortByYoungest(List<Person> listOfPeople)
     {
-        System.out.println("-----------------Sort by Youngest------------");
+        System.out.println(sortByYoungest);
         Comparator<Person> dobComparator = DataSorter.SortByDOB;
         Collections.sort(listOfPeople, dobComparator.reversed());
         listOfPeople.forEach(System.out::println);
@@ -47,7 +51,7 @@ public class SortingImpl
 
     public List<Person> sortByFavColorAndLastName(List<Person> listOfPeople)
     {
-        System.out.println("-----------------Sort by Color and LastName------------");
+        System.out.println(sortByColorAndLastName);
         Comparator<Person> favColorComparator = DataSorter.FavColor;
         Comparator<Person> lastNameComparator = DataSorter.SortByLastName;
         Collections.sort(listOfPeople, favColorComparator.thenComparing(lastNameComparator.reversed()));
